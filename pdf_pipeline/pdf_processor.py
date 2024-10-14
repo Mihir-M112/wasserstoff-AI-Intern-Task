@@ -10,10 +10,16 @@ from datetime import datetime
 from math import log
 import traceback
 import multiprocessing
+from dotenv import load_dotenv
 
 
-# Configure MongoDB Atlas (replace with your URI)
-MONGO_URI = "mongodb+srv://mihirm1211:sHIshjSyibuFNoFf@pdf-processor.drvde.mongodb.net/?retryWrites=true&w=majority&appName=pdf-processor"
+# Load environment variables from .env file
+load_dotenv()
+
+# Retrieve MongoDB URI from environment variable
+MONGO_URI = os.getenv("MONGO_URI")  # create .env file & Replace with your own MongoDB URI (Atlas or local)
+
+# Connect to MongoDB
 client = MongoClient(MONGO_URI)
 db = client['PDFStorageDB']
 collection = db['pdf_documents']
