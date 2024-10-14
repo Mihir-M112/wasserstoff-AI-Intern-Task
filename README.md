@@ -173,3 +173,4 @@ PDF-Processing-Pipeline/
 ├──   .gitignore
 ├──   .env
 ```
+Video Link: https://drive.google.com/drive/folders/1Oajs4TUStoxm7m8UPckRWMTo_ZV6xZov?usp=drive_link

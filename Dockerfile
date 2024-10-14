@@ -1,30 +1,19 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy the requirements file into the container at /app
+COPY requirements.txt ./
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    libffi-dev \
-    libssl-dev \
-    && rm -rf /var/lib/apt/lists/*
+COPY .env ./
 
-# Install Python dependencies
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Set environment variables for MongoDB URI (You can also pass these during runtime)
-ENV MONGO_URI="your_mongodb_connection_string"
+# Copy the rest of the application files into the container
+COPY . .
 
-# Create log directory
-RUN mkdir -p /app/logs
-
-# Expose port if needed (only if your app serves a web service)
-# EXPOSE 8000
-
-# Define the command to run your pipeline
-CMD ["python", "pdf_pipeline.py"]
+# Command to run the application
+CMD ["python", "main.py"]
