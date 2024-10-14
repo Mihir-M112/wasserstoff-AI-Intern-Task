@@ -5,3 +5,4 @@ transformers
 torch 
 nltk
 concurrent-log-handler
+requests
