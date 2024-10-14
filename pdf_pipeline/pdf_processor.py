@@ -11,7 +11,7 @@ from math import log
 import traceback
 import multiprocessing
 from dotenv import load_dotenv
-
+import time
 
 # Load environment variables from .env file
 load_dotenv()
@@ -149,6 +149,7 @@ def generate_pdf_metadata(pdf_path):
 # Function to process a single PDF and store results in MongoDB
 def process_pdf(pdf_path, all_docs, top_n=10):
     try:
+        start_time = time.time()  # Start time for processing the individual PDF
         logging.info(f"Processing {pdf_path}")
         
         # Extract the text from the PDF
@@ -178,6 +179,10 @@ def process_pdf(pdf_path, all_docs, top_n=10):
         
         else:
             logging.warning(f"Failed to extract text from {pdf_path}")
+        # Log the time taken for processing this PDF
+        end_time = time.time()
+        time_taken = end_time - start_time
+        logging.info(f"Time taken to process {pdf_path}: {time_taken:.2f} seconds")
     
     except Exception as e:
         # Log the exception with a detailed traceback
@@ -191,12 +196,19 @@ def process_pdfs_concurrently(pdf_files, all_docs):
     logging.info("Starting concurrent processing of PDFs.")
     
     try:
+        # Start time for concurrent processing
+        overall_start_time = time.time()
         # Calculate max_workers based on the number of PDFs or CPU cores
         max_workers = min(len(pdf_files), multiprocessing.cpu_count())
         logging.info(f"Using {max_workers} workers for PDF processing.")
         
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             executor.map(lambda pdf_file: process_pdf(pdf_file, all_docs), pdf_files)
+        
+        # End time for concurrent processing
+        overall_end_time = time.time()
+        overall_time_taken = overall_end_time - overall_start_time
+        logging.info(f"Total time taken for concurrent processing: {overall_time_taken:.2f} seconds")
     
     except Exception as e:
         logging.error(f"Error during concurrent processing: {e}")
