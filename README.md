@@ -152,23 +152,24 @@ The project is structured as follows:
 
 ```
 PDF-Processing-Pipeline/ 
-│   Datasets/
-│   │   sample1.pdf
-│   │   sample2.pdf
-│   │   ...
-|  logs/
-|   |  pipeline.log
-│   pdf_pipeline/   
-│   │   __init__.py
-│   │   pdf_processor.py
-│   │   data_ingestion.py
-│   venv/
-│      ...
-|   dataset.json
-│   README.md
-│   main.py
-│   requirements.txt
-│   Dockerfile
-│   docker-compose.yml
-│   .gitignore
-│   .env
+├──   Datasets/
+    ├──  sample1.pdf
+    ├──   sample2.pdf
+    ├──   ...
+├── logs/
+    ├──  pipeline.log
+├──   pdf_pipeline/   
+    ├──   __init__.py
+    ├──   pdf_processor.py
+    ├──  data_ingestion.py
+├──   venv/
+    ├──      ...
+├──   dataset.json
+├──   README.md
+├──   main.py
+├──  requirements.txt
+├──   Dockerfile
+├──  docker-compose.yml
+├──   .gitignore
+├──   .env
+```
