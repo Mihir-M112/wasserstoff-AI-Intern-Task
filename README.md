@@ -144,3 +144,31 @@ The application can be containerized using Docker for easy deployment and enviro
     ```
   
 This will start the PDF processing pipeline and a MongoDB container. The pipeline will automatically connect to the MongoDB container to store the results.
+
+
+## Project Structure
+
+The project is structured as follows:
+
+```
+PDF-Processing-Pipeline/ 
+│   Datasets/
+│   │   sample1.pdf
+│   │   sample2.pdf
+│   │   ...
+|  logs/
+|   |  pipeline.log
+│   pdf_pipeline/   
+│   │   __init__.py
+│   │   pdf_processor.py
+│   │   data_ingestion.py
+│   venv/
+│      ...
+|   dataset.json
+│   README.md
+│   main.py
+│   requirements.txt
+│   Dockerfile
+│   docker-compose.yml
+│   .gitignore
+│   .env
